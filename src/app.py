@@ -8,7 +8,7 @@ from src.main.lab import built_in_evaluator, custom_evaluator
 
 def main():
 
-    built_in_evaluator()
+    # built_in_evaluator()
 
     custom_evaluator()
 

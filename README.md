@@ -6,18 +6,18 @@
 the outcomes produced by your models are **reliable and useful across a broad array of inputs.**
   - Evaluation is critical when deploying LLM applications, since production environments require 
   **repeatable and useful outcomes that can be evaluated based on a given criteria.**
-  
-- We will explore some **Built-In Evaluators**, which come with langchain. They include:
-  - This one
-  - That one
-  - Another one
-  - Plenty more that can be found in the documentation linked below.
-- We will also create a **Custom Evaluator**, which will allow us to create our own criteria for response evaluation.
-
 
 # Evaluation Lab
 
-- In this lab, we will be ____________
+- In this lab, we will explore some **Built-In Evaluators**, which come with langchain. They include:
+  - Relevance
+  - Conciseness
+  - Depth
+  - Helpfulness
+  - Harmfulness
+  - Insensitivity
+  - Plenty more that can be found in the documentation linked below.
+- We will also create a **Custom Evaluator**, which will allow us to create our own criteria for response evaluation.
 
 ### Files to Modify:
 
@@ -30,7 +30,7 @@ the outcomes produced by your models are **reliable and useful across a broad ar
 
 ### Notes & Resources
 
-- This lab utilizes an LLM over an external connection, and can become inaccessible for various reasons. Running ```test_llm_sanity_check``` in ```src/main/labtest.py``` can determine if a valid connection has been established. 
+- This lab utilizes an LLM over an external connection, and can become inaccessible for various reasons, including an invalid API key. 
 - Environment variables should be automatically configured for you upon opening the lab.
 
 - [Langchain Evaluation](https://python.langchain.com/docs/guides/evaluation/)
