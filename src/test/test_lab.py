@@ -39,7 +39,6 @@ class TestLLMResponse(unittest.TestCase):
         evaluator = load_evaluator(EvaluatorType.CRITERIA, llm=llm, criteria=built_in_criteria["depth"])
 
         prediction1 = chain.run(built_in_criteria["depth"])
-        print("AYOOOOOO")
         eval_result = evaluator.evaluate_strings(
             prediction=prediction1,
             input=built_in_criteria["depth"]

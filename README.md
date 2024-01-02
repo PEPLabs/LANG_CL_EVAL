@@ -10,9 +10,9 @@ the outcomes produced by your models are **reliable and useful across a broad ar
 # Evaluation Lab
 
 - In this lab, we will explore some **Built-In Evaluators**, which come with langchain. They include:
+  - Depth
   - Relevance
   - Conciseness
-  - Depth
   - Helpfulness
   - Harmfulness
   - Insensitivity

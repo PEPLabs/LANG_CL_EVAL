@@ -21,7 +21,7 @@ llm = HuggingFaceEndpoint(
     }
 )
 
-template = """You are an informative chatbot that gives concise answers to valid questions when possible"""
+template = """You are an informative chatbot that gives answers to valid questions"""
 
 system_message_template = SystemMessagePromptTemplate.from_template(template)
 human_message_template = HumanMessagePromptTemplate.from_template("{input}")
@@ -34,32 +34,23 @@ chain = LLMChain(
 
 """
 Your tasks for lab completion are below: 
--You will first define some prompts that will be evaluated by the built-in "conciseness" evaluator
+-You will first define two prompts that will be evaluated by the built-in "depth" evaluator
 -Then, you will define your own custom criteria that will evaluate whether a response returns a mathematical value
-
-Make sure to look at the samples for both tasks to get an idea of how to complete them
 """
 
 # TODO: Add one prompt that will PASS the built-in "depth" criteria, and one prompt that will FAIL it.
-# In other words:
-# write a prompt that returns an insightful answer (an answer with depth)
-# and one that returns a short black-and-white answer (an answer with no depth)
+"""In other words:
+ -write one question that returns an insightful answer (an answer with depth)
+ -and one question that returns a simple answer (an answer with no depth. maybe a simple calculation?)"""
 depth_criteria_passing_prompt = "What is the meaning of life?"
-depth_criteria_failing_prompt = "What is 4 cubed?"
-
-# This dictionary will use built-in criteria to evaluate LLM responses. Do not to edit this.
-# It has a "conciseness" sample criteria already written, and the "depth" key will hold your work above.
-built_in_criteria = {
-    "conciseness": ["What is 4 cubed?", "Can you tell me some theories on the meaning of life?"],
-    "depth": [depth_criteria_passing_prompt, depth_criteria_failing_prompt],
-}
+depth_criteria_failing_prompt = "What is 2 + 2?"
 
 # This is a sample custom criteria that evaluates the insightfulness of a response. Do not edit this.
 sample_custom_criteria = {
     "spanish": "Does the output contain words from the spanish language?"
 }
 
-# TODO: create your own custom criteria that evaluates whether a response returns a MATHEMATICAL value
+# TODO: create your own CUSTOM criteria that evaluates whether a response returns a MATHEMATICAL value
 your_custom_criteria = {
     "numeric": "Does the output contain numeric or mathematical information?"
 }
@@ -67,27 +58,30 @@ your_custom_criteria = {
 """The following functions are responsible for evaluating the prompts. DO NOT EDIT THEM
 DO read through the functions along with the console outputs to get an idea of what the function is doing.
 
-The evaluator will return a VALUE of Y and SCORE of 1 if the answer meets the criteria.
-The evaluator will return a VALUE of N and SCORE of 0 if the answer does not meet the criteria."""
-def built_in_evaluator():
-    for criteria in built_in_criteria:
-        evaluator = load_evaluator(EvaluatorType.CRITERIA, llm=llm, criteria=criteria)
-        print("\n**{}**".format(criteria.upper()))
+The evaluator will return a VALUE of Y if the answer meets the criteria.
+The evaluator will return a VALUE of N if the answer does not meet the criteria."""
+def built_in_depth_evaluator(query: str):
 
-        for prompt in built_in_criteria[criteria]:
-            prediction = chain.run(prompt)
-            eval_result = evaluator.evaluate_strings(
-                prediction=prediction,
-                input=prompt
-            )
+    prediction = chain.run(query)
 
-            print("\nPROMPT : ", prompt)
-            print("RESULT :\n","\n".join(prediction.replace("\n","").split(".")[:-1]))
-            print("VALUE :", eval_result["value"])
-            print("SCORE :", eval_result["score"])
-            print("REASON :\n","\n".join(eval_result["reasoning"].replace("\n","").split(".")[:-1]))
-            print("--------------------------------")
-    print("********END OF BUILT-IN EVALUATORS********")
+    evaluator = load_evaluator(EvaluatorType.CRITERIA, llm=llm, criteria="depth")
+    eval_result = evaluator.evaluate_strings(prediction=prediction, input=query)
+
+    print(eval_result)
+    print("\nPROMPT: ", "DEPTH")
+
+    print("INPUT: ", query)
+    print("OUTPUT:", prediction.replace("Chatbot: ","").replace("\n","").split(".")[0])
+    result = (eval_result["reasoning"].replace("\n", "").replace("[BEGIN RESPONSE]", "")[0])
+
+    print("RESULT : ", eval_result["value"])
+
+    if result == "Y":
+        print("The output has depth")
+    else:
+        print("The output does not have depth")
+
+    print("--------------------------------")
 
 def custom_evaluator():
 
@@ -108,7 +102,6 @@ def custom_evaluator():
         print("The output contains Spanish words")
     else:
         print("The output does not contain Spanish words")
-
 
     print("--------------------------------")
 
