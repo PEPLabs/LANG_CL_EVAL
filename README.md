@@ -5,9 +5,11 @@
 - In application development with LLMs, it is critical to ensure that the outcomes produced by your models are **predictable and useful for a broad array of inputs.**
   - Thus, Evaluation can be beneficial when deploying LLM applications, since they can assess responses across a wide array of criteria.
 
-- In this lab, we will explore Langchain's **String Evaluators**, which assess the predicted string for a given input, usually comparing it against a reference string.
+- In this lab, we will explore Langchain's **String Evaluators**, which assess a predicted string for a given input, assessing it based of specific criteria or comparing it against a reference string.
 
 # Evaluation Lab
+
+### Objectives:
 
 - In this lab, we will use an Evaluator with **Built-In Criteria**. They include:
   - Depth
