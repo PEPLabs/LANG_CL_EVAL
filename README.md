@@ -2,22 +2,21 @@
 
 ### Evaluators
 
-- In application development with LLMs, one of the most critical components is ensuring that 
-the outcomes produced by your models are **reliable and useful across a broad array of inputs.**
-  - Evaluation is critical when deploying LLM applications, since production environments require 
-  **repeatable and useful outcomes that can be evaluated based on a given criteria.**
+- In application development with LLMs, it is critical to ensure that the outcomes produced by your models are **predictable and useful for a broad array of inputs.**
+  - Thus, Evaluation can be beneficial when deploying LLM applications, since they can assess responses across a wide array of criteria.
+
+- In this lab, we will explore Langchain's **String Evaluators**, which assess the predicted string for a given input, usually comparing it against a reference string.
 
 # Evaluation Lab
 
-- In this lab, we will explore some **Built-In Evaluators**, which come with langchain. They include:
+- In this lab, we will use an Evaluator with **Built-In Criteria**. They include:
   - Depth
   - Relevance
   - Conciseness
   - Helpfulness
-  - Harmfulness
-  - Insensitivity
   - Plenty more that can be found in the documentation linked below.
-- We will also create a **Custom Evaluator**, which will allow us to create our own criteria for response evaluation.
+  
+- We will also use an Evaluator with **Custom Criteria**, which allows us to create our own evaluation parameters.
 
 ### Files to Modify:
 
