@@ -41,7 +41,7 @@ Your tasks for lab completion are below:
 
 # TODO: Write an input that will pass the built-in "depth" criteria.
 """In other words, write a question that gets an insightful or "deep" answer from the llm"""
-depth_criteria_passing_query = "How can I be happy in life?"
+depth_criteria_passing_query = ""
 
 # This is a sample custom criteria that will evaluate whether a response contains spanish words.
 # Do not edit this, use it as a template for the task below
@@ -51,7 +51,7 @@ sample_custom_criteria = {
 
 # TODO: create your own custom criteria that evaluates whether a response returns a mathematical value
 your_custom_criteria = {
-    "mathematical": "Does the output contain numeric or mathematical information?"
+    "TODO"
 }
 
 """The first 2 functions are responsible for evaluating llm responses. DO NOT EDIT THEM.
@@ -110,14 +110,16 @@ def custom_spanish_evaluator(query: str):
     else:
         print("The output does not contain Spanish words")
 
+    return eval_result
+
 def custom_mathematical_evaluator(query: str):
 
     # Initial response from LLM
     prediction = chat_model.invoke(textInput.format(userInput=query))
 
-    # TODO: instantiate an evaluator that uses your custom criteria
+    # TODO: instantiate an evaluator that uses your custom criteria, and evaluate the response
     """ Remember the examples of this in the methods above """
-    evaluator = load_evaluator(EvaluatorType.CRITERIA, criteria=your_custom_criteria, llm=chat_model)
+    evaluator = "TODO"
     eval_result = evaluator.evaluate_strings(prediction=prediction, input=query)
 
     # Print results
@@ -135,6 +137,5 @@ def custom_mathematical_evaluator(query: str):
     else:
         print("The output does not contain Mathematical content")
 
-    # This is just for testing
     return eval_result
 

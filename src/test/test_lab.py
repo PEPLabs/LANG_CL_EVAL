@@ -3,8 +3,7 @@ import unittest
 from langchain.evaluation import load_evaluator, EvaluatorType
 from langchain_core.outputs import LLMResult
 
-from src.main.lab import chat_model, built_in_depth_evaluator, your_custom_criteria, textInput, \
-    depth_criteria_passing_query, custom_mathematical_evaluator
+from src.main.lab import chat_model, textInput,depth_criteria_passing_query, custom_mathematical_evaluator
 from src.utilities.llm_testing_util import llm_connection_check, llm_wakeup
 
 """
@@ -46,7 +45,7 @@ class TestLLMResponse(unittest.TestCase):
             input=depth_criteria_passing_query
         )
 
-        # print(eval_result)
+        print(eval_result)
 
         self.assertEqual(eval_result["value"], "Y")
 
@@ -57,8 +56,16 @@ class TestLLMResponse(unittest.TestCase):
 
         query = "What is 5 * 5?"
 
-        eval_result = custom_mathematical_evaluator(query)
+        try:
+            eval_result = custom_mathematical_evaluator(query)
 
-        # print(eval_result)
+            print(eval_result)
 
-        self.assertEqual(eval_result["value"], "Y")
+            self.assertEqual(eval_result["value"], "Y")
+
+        except ValueError as e:
+            print("Looks like you haven't defined your custom criteria and/or custom evaluator.")
+            self.fail("This test will fail until you have defined your custom criteria.")
+        except AttributeError as e:
+            print("Looks like you haven't defined your custom criteria and/or custom evaluator.")
+            self.fail("This test will fail until you have defined your custom evaluator.")

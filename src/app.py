@@ -10,7 +10,7 @@ def main():
 
     built_in_depth_evaluator(depth_criteria_passing_query)
 
-    custom_spanish_evaluator("How do you say 'my pants are on fire' in Spanish?")
+    spanish_eval = custom_spanish_evaluator("How do you say 'my pants are on fire' in Spanish?")
 
     custom_mathematical_evaluator("What is 5 * 5?")
 
