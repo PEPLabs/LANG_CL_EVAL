@@ -59,8 +59,7 @@ DO read through the functions along with their prints to the console to get an i
 
 You will be responsible for instantiating the evaluator in the 3rd function (custom_mathematical_evaluator).
 
-The evaluator will return a VALUE of Y and SCORE of 1 if the answer meets the criteria.
-The evaluator will return a VALUE of Y and SCORE of 0 if the answer does not meet the criteria."""
+The evaluator will return a VALUE of Y and SCORE of 1 if the answer meets the criteria."""
 def built_in_depth_evaluator(query: str):
 
     # Initial response from LLM
@@ -71,19 +70,7 @@ def built_in_depth_evaluator(query: str):
     eval_result = evaluator.evaluate_strings(prediction=prediction.content, input=query)
 
     # Print results
-    print("\nPROMPT: ", "DEPTH")
-    print("INPUT: ", query)
-    print("OUTPUT:", prediction.content)
-
-    result = (eval_result["value"].replace(" ", ""))
-    print("RESULT : ", result)
-    score = (eval_result["score"])
-    print("SCORE : ", score)
-
-    if result == "Y" and score == 1:
-        print("The output has depth")
-    else:
-        print("The output does not have depth")
+    print_results("DEPTH", query, prediction, eval_result)
 
 
 def custom_spanish_evaluator(query: str):
@@ -96,21 +83,8 @@ def custom_spanish_evaluator(query: str):
     eval_result = evaluator.evaluate_strings(prediction=prediction, input=query)
 
     # Print results
-    print("\nPROMPT : ", "SPANISH")
-    print("INPUT: ", query)
-    print("OUTPUT:", prediction.content)
+    print_results("SPANISH", query, prediction, eval_result)
 
-    result = (eval_result["value"].replace(" ", ""))
-    print("RESULT: ", result)
-    score = (eval_result["score"])
-    print("SCORE: ", score)
-
-    if result == "Y" and score == 1:
-        print("The output contains Spanish words")
-    else:
-        print("The output does not contain Spanish words")
-
-    return eval_result
 
 def custom_mathematical_evaluator(query: str):
 
@@ -123,7 +97,16 @@ def custom_mathematical_evaluator(query: str):
     eval_result = evaluator.evaluate_strings(prediction=prediction, input=query)
 
     # Print results
-    print("\nPROMPT : ", "MATHEMATICAL")
+    print_results("MATHEMATICAL", query, prediction, eval_result)
+
+    # This is just for testing
+    return eval_result
+
+
+"""This function will print the results of evaluations"""
+def print_results(prompt: str, query: str, prediction, eval_result):
+
+    print("\nPROMPT : ", prompt)
     print("INPUT: ", query)
     print("OUTPUT:", prediction.content)
 
@@ -133,9 +116,6 @@ def custom_mathematical_evaluator(query: str):
     print("SCORE: ", score)
 
     if result == "Y" and score == 1:
-        print("The output contains Mathematical content")
+        print("The output passes the " + prompt + " criteria")
     else:
-        print("The output does not contain Mathematical content")
-
-    return eval_result
-
+        print("The output does not pass the " + prompt + " criteria")

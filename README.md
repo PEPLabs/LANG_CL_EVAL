@@ -5,7 +5,7 @@
 - In application development with LLMs, it is critical to ensure that the outcomes produced by your models are **predictable and useful for a broad array of inputs.**
   - Thus, Evaluation can be beneficial when deploying LLM applications, since they can assess responses across a wide array of criteria.
 
-- In this lab, we will explore Langchain's **String Evaluators**, which assess a predicted string for a given input, assessing it based of specific criteria or comparing it against a reference string.
+- In this lab, we will explore Langchain's **String Evaluators**, which assess a predicted string for a given input, assessing it based on specific criteria or comparing it against a reference string.
 
 # Evaluation Lab
 
@@ -23,7 +23,7 @@
 ### Files to Modify:
 
 - You will be directly modifying ```src/main/lab.py.```
-  - Look for the "TODO" comments, which will specify the requirements for completing the lab. 
+  - Look for the 3 "TODO" comments, which will specify the requirements for completing the lab. 
 - You may modify ```src/app.py```, which contains sample code that should provide a valid output upon lab completion. Note that there is likely no reason modify app.py in this particular lab.
 - DO NOT modify ```src/main/labtest.py```, as it contains the tests that you must pass to complete the lab.
   - You can consider your lab complete when every test passes.
